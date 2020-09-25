@@ -44,7 +44,16 @@ public class Rover {
         int to = inc % 4;
         switch (direction) {
             case 'N':
-                direction = Directions.W.des;
+                switch (to){
+                    case 1:direction = Directions.W.des;
+                    break;
+                    case 2:direction = Directions.S.des;
+                    break;
+                    case 3:direction = Directions.E.des;
+                        break;
+                    case 4:direction = Directions.N.des;
+                        break;
+                }
                 break;
             case 'W':
                 direction = Directions.S.des;

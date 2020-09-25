@@ -185,5 +185,36 @@ public class RoverTest {
         assertTrue(rover.direction == Directions.W.des);
     }
 
-    
+    @Test
+    public void turnLeftN2() {
+        rover.direction = Directions.N.des;
+        int inc = 2;
+        rover.turnLeft(inc);
+        assertTrue(rover.direction == Directions.S.des);
+    }
+
+    @Test
+    public void turnLeftW2() {
+        rover.direction = Directions.W.des;
+        int inc = 1;
+        rover.turnLeft(inc);
+        assertTrue(rover.direction == Directions.S.des);
+    }
+
+    @Test
+    public void turnLeftS2() {
+        rover.direction = Directions.S.des;
+        int inc = 1;
+        rover.turnLeft(inc);
+        assertTrue(rover.direction == Directions.E.des);
+    }
+
+
+    public void turnLeftE2() {
+        rover.direction = Directions.E.des;
+        int inc = 1;
+        rover.turnLeft(inc);
+        assertTrue(rover.direction == Directions.W.des);
+    }
+
 }
