@@ -1,8 +1,9 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class CommandBuffer {
-    List<Character> commands;
-    public  CommandBuffer(List<Character> commands){
+    ArrayList<Character> commands;
+    public  CommandBuffer(ArrayList<Character> commands){
         this.commands=commands;
     }
 }

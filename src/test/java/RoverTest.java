@@ -36,20 +36,20 @@ public class RoverTest {
 
     @Test
     public void emptyCommandBuffer() {
-        CommandBuffer commandBuffer = new CommandBuffer(new ArrayList<>());
-        assertEquals(0, commandBuffer.commands.size());
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>());
+        assertEquals(0, rover.commandBuffer.commands.size());
     }
 
     @Test
     public void singleCommandBuffer() {
-        CommandBuffer commandBuffer = new CommandBuffer(new ArrayList<>(Collections.singletonList(Commands.B.des)));
-        assertEquals(1, commandBuffer.commands.size());
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Collections.singletonList(Commands.B.des)));
+        assertEquals(1, rover.commandBuffer.commands.size());
     }
 
     @Test
     public void twoCommandBuffer() {
-        CommandBuffer commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.B.des)));
-        assertEquals(2, commandBuffer.commands.size());
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.B.des)));
+        assertEquals(2, rover.commandBuffer.commands.size());
     }
 
     @Test
@@ -147,43 +147,87 @@ public class RoverTest {
         assertNotEquals(rover.position.y, rover.MIN_Y, 0.0);
     }
 
-//    @Test void forwardX_when_E_direction(){
-//        rover.direction=Directions.E.des;
-//        rover.moveFordward();
-//
-//    }
+    @Test
+    public void forwardX_when_N_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.B.des)));
+        rover.addCommand(Commands.F.des,Directions.N.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.F.des);
+    }
+
+    @Test
+    public void forwardX_when_E_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.B.des)));
+        rover.addCommand(Commands.F.des,Directions.E.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.F.des);
+    }
+
+    @Test
+    public void backwardX_when_S_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.F.des)));
+        rover.addCommand(Commands.F.des,Directions.S.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.B.des);
+    }
+
+    @Test
+    public void backwardX_when_W_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.F.des)));
+        rover.addCommand(Commands.F.des,Directions.W.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.B.des);
+    }
 
     @Test
     public void turnLeftN() {
         rover.direction = Directions.N.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.W.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.W.des);
     }
 
     @Test
     public void turnLeftW() {
         rover.direction = Directions.W.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.S.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.S.des);
     }
 
     @Test
     public void turnLeftS() {
         rover.direction = Directions.S.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.E.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.E.des);
     }
 
     @Test
     public void turnLeftE() {
         rover.direction = Directions.E.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.W.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.N.des);
     }
 
-    
+    @Test
+    public void turnRightN() {
+        rover.direction = Directions.N.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.E.des);
+    }
+
+    @Test
+    public void turnRightE() {
+        rover.direction = Directions.E.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.S.des);
+    }
+
+    @Test
+    public void turnRightS() {
+        rover.direction = Directions.S.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.W.des);
+    }
+
+    @Test
+    public void turnRightW() {
+        rover.direction = Directions.W.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.N.des);
+    }
 }
