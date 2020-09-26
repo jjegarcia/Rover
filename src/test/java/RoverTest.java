@@ -54,136 +54,170 @@ public class RoverTest {
 
     @Test
     public void moveForwardX() {
-        double inc = 2;
-        rover.moveForwardX(inc);
-        double differenceX = rover.position.x - rover.previousPosition.x;
-        assertEquals(differenceX, inc, 0.0);
+        rover.position.x = rover.MIN_X;
+        rover.moveForwardX();
+        assertEquals(rover.position.x, rover.MIN_X + 1, 0.0);
     }
 
     @Test
     public void capForwardX() {
-        double inc = rover.MAX_X + 10;
-        rover.moveForwardX(inc);
+        rover.position.x = rover.MAX_X + 1;
+        rover.moveForwardX();
         assertEquals(rover.position.x, rover.MAX_X, 0.0);
     }
 
     @Test
     public void capNoForwardX() {
-        double inc = rover.MAX_X - 10;
-        rover.moveForwardX(inc);
+        rover.position.x = rover.MIN_X;
+        rover.moveForwardX();
         assertNotEquals(rover.position.x, rover.MAX_X, 0.0);
     }
 
     @Test
     public void moveForwardY() {
-        double inc = 2;
-        rover.moveForwardY(inc);
-        double differenceY = rover.position.y - rover.previousPosition.y;
-        assertEquals(differenceY, inc, 0.0);
+        rover.position.y = rover.MIN_Y;
+        rover.moveForwardY();
+        assertEquals(rover.position.y, rover.MIN_Y + 1, 0.0);
     }
 
 
     @Test
     public void capForwardY() {
-        double inc = rover.MAX_Y + 10;
-        rover.moveForwardY(inc);
+        rover.position.y = rover.MAX_Y + 1;
+        rover.moveForwardY();
         assertEquals(rover.position.y, rover.MAX_Y, 0.0);
     }
 
     @Test
     public void capNoForwardY() {
-        double inc = rover.MAX_Y - 10;
-        rover.moveForwardY(inc);
+        rover.position.y = rover.MIN_Y;
+        rover.moveForwardY();
         assertNotEquals(rover.position.y, rover.MAX_Y, 0.0);
     }
 
     @Test
     public void moveBackwardX() {
-        rover.position.x = 5;
-        double inc = 2;
-        rover.moveBackwardX(inc);
-        double differenceX = rover.previousPosition.x - rover.position.x;
-        assertEquals(differenceX, inc, 0.0);
+        rover.position.x = rover.MAX_X;
+        rover.moveBackwardX();
+        assertEquals(rover.position.x, rover.MAX_X - 1, 0.0);
     }
 
     @Test
     public void capBackwardX() {
-        rover.position.x = 5;
-        double inc = 10;
-        rover.moveBackwardX(inc);
+        rover.position.x = rover.MIN_X - 1;
+        rover.moveBackwardX();
         assertEquals(rover.position.x, rover.MIN_X, 0.0);
     }
 
     @Test
     public void capNoBackwardX() {
-        rover.position.x = 5;
-        double inc = 2;
-        rover.moveBackwardX(inc);
+        rover.position.x = rover.MAX_X;
+        rover.moveBackwardX();
         assertNotEquals(rover.position.x, rover.MIN_X, 0.0);
     }
 
     @Test
     public void moveBackwardY() {
-        rover.position.y = 5;
-        double inc = 2;
-        rover.moveBackwardY(inc);
-        double differenceY = rover.previousPosition.y - rover.position.y;
-        assertEquals(differenceY, inc, 0.0);
+        rover.position.y = rover.MAX_Y;
+        rover.moveBackwardY();
+        assertEquals(rover.position.y, rover.MAX_Y - 1, 0.0);
     }
 
     @Test
     public void capBackwardY() {
-        rover.position.y = 5;
-        double inc = 10;
-        rover.moveBackwardY(inc);
+        rover.position.y = rover.MIN_Y - 1;
+        rover.moveBackwardY();
         assertEquals(rover.position.y, rover.MIN_Y, 0.0);
     }
 
     @Test
     public void capNoBackwardY() {
-        rover.position.y = 5;
-        double inc = 2;
-        rover.moveBackwardY(inc);
+        rover.position.y = rover.MAX_Y;
+        rover.moveBackwardY();
         assertNotEquals(rover.position.y, rover.MIN_Y, 0.0);
     }
 
-//    @Test void forwardX_when_E_direction(){
-//        rover.direction=Directions.E.des;
-//        rover.moveFordward();
-//
-//    }
+    @Test
+    public void forwardX_when_N_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.B.des)));
+        rover.addCommand(Commands.F.des, Directions.N.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.F.des);
+    }
+
+    @Test
+    public void forwardX_when_E_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.B.des)));
+        rover.addCommand(Commands.F.des, Directions.E.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.F.des);
+    }
+
+    @Test
+    public void backwardX_when_S_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.F.des)));
+        rover.addCommand(Commands.F.des, Directions.S.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.B.des);
+    }
+
+    @Test
+    public void backwardX_when_W_direction() {
+        rover.commandBuffer = new CommandBuffer(new ArrayList<>(Arrays.asList(Commands.B.des, Commands.F.des)));
+        rover.addCommand(Commands.F.des, Directions.W.des);
+        assertEquals((char) rover.commandBuffer.commands.get(rover.commandBuffer.commands.size() - 1), Commands.B.des);
+    }
 
     @Test
     public void turnLeftN() {
         rover.direction = Directions.N.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.W.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.W.des);
     }
 
     @Test
     public void turnLeftW() {
         rover.direction = Directions.W.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.S.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.S.des);
     }
 
     @Test
     public void turnLeftS() {
         rover.direction = Directions.S.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.E.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.E.des);
     }
 
     @Test
     public void turnLeftE() {
         rover.direction = Directions.E.des;
-        int inc = 1;
-        rover.turnLeft(inc);
-        assertTrue(rover.direction == Directions.W.des);
+        rover.turnLeft();
+        assertEquals(rover.direction, Directions.N.des);
     }
 
-    
+    @Test
+    public void turnRightN() {
+        rover.direction = Directions.N.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.E.des);
+    }
+
+    @Test
+    public void turnRightE() {
+        rover.direction = Directions.E.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.S.des);
+    }
+
+    @Test
+    public void turnRightS() {
+        rover.direction = Directions.S.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.W.des);
+    }
+
+    @Test
+    public void turnRightW() {
+        rover.direction = Directions.W.des;
+        rover.turnRight();
+        assertEquals(rover.direction, Directions.N.des);
+    }
 }
