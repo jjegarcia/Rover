@@ -19,22 +19,22 @@ public class Rover {
     }
 
     public void moveForwardX() {
-        position.x ++;
+        position.x++;
         if (position.x >= MAX_X) position.x = MAX_X;
     }
 
     public void moveForwardY() {
-        position.y ++;
+        position.y++;
         if (position.y >= MAX_Y) position.y = MAX_Y;
     }
 
     public void moveBackwardX() {
-        position.x --;
+        position.x--;
         if (position.x <= MIN_X) position.x = MIN_X;
     }
 
     public void moveBackwardY() {
-        position.y --;
+        position.y--;
         if (position.y <= MIN_Y) position.y = MIN_Y;
     }
 
