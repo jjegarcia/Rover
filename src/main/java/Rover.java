@@ -18,22 +18,22 @@ public class Rover {
         command = Commands.F.des;
     }
 
-    public void moveForwardX() {
+    public void moveRight() {
         position.x++;
         if (position.x >= MAX_X) position.x = MAX_X;
     }
 
-    public void moveForwardY() {
+    public void moveUp() {
         position.y++;
         if (position.y >= MAX_Y) position.y = MAX_Y;
     }
 
-    public void moveBackwardX() {
+    public void moveLeft() {
         position.x--;
         if (position.x <= MIN_X) position.x = MIN_X;
     }
 
-    public void moveBackwardY() {
+    public void moveDown() {
         position.y--;
         if (position.y <= MIN_Y) position.y = MIN_Y;
     }

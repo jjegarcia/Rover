@@ -53,87 +53,87 @@ public class RoverTest {
     }
 
     @Test
-    public void moveForwardX() {
+    public void moveRight() {
         rover.position.x = rover.MIN_X;
-        rover.moveForwardX();
+        rover.moveRight();
         assertEquals(rover.position.x, rover.MIN_X + 1, 0.0);
     }
 
     @Test
-    public void capForwardX() {
+    public void capRight() {
         rover.position.x = rover.MAX_X + 1;
-        rover.moveForwardX();
+        rover.moveRight();
         assertEquals(rover.position.x, rover.MAX_X, 0.0);
     }
 
     @Test
-    public void capNoForwardX() {
+    public void capNoRight() {
         rover.position.x = rover.MIN_X;
-        rover.moveForwardX();
+        rover.moveRight();
         assertNotEquals(rover.position.x, rover.MAX_X, 0.0);
     }
 
     @Test
-    public void moveForwardY() {
+    public void moveUp() {
         rover.position.y = rover.MIN_Y;
-        rover.moveForwardY();
+        rover.moveUp();
         assertEquals(rover.position.y, rover.MIN_Y + 1, 0.0);
     }
 
 
     @Test
-    public void capForwardY() {
+    public void capUp() {
         rover.position.y = rover.MAX_Y + 1;
-        rover.moveForwardY();
+        rover.moveUp();
         assertEquals(rover.position.y, rover.MAX_Y, 0.0);
     }
 
     @Test
-    public void capNoForwardY() {
+    public void capNoUp() {
         rover.position.y = rover.MIN_Y;
-        rover.moveForwardY();
+        rover.moveUp();
         assertNotEquals(rover.position.y, rover.MAX_Y, 0.0);
     }
 
     @Test
-    public void moveBackwardX() {
+    public void moveLeft() {
         rover.position.x = rover.MAX_X;
-        rover.moveBackwardX();
+        rover.moveLeft();
         assertEquals(rover.position.x, rover.MAX_X - 1, 0.0);
     }
 
     @Test
-    public void capBackwardX() {
+    public void capLeft() {
         rover.position.x = rover.MIN_X - 1;
-        rover.moveBackwardX();
+        rover.moveLeft();
         assertEquals(rover.position.x, rover.MIN_X, 0.0);
     }
 
     @Test
-    public void capNoBackwardX() {
+    public void capNoLeft() {
         rover.position.x = rover.MAX_X;
-        rover.moveBackwardX();
+        rover.moveLeft();
         assertNotEquals(rover.position.x, rover.MIN_X, 0.0);
     }
 
     @Test
-    public void moveBackwardY() {
+    public void moveDown() {
         rover.position.y = rover.MAX_Y;
-        rover.moveBackwardY();
+        rover.moveDown();
         assertEquals(rover.position.y, rover.MAX_Y - 1, 0.0);
     }
 
     @Test
-    public void capBackwardY() {
+    public void capDown() {
         rover.position.y = rover.MIN_Y - 1;
-        rover.moveBackwardY();
+        rover.moveDown();
         assertEquals(rover.position.y, rover.MIN_Y, 0.0);
     }
 
     @Test
-    public void capNoBackwardY() {
+    public void capNoDown() {
         rover.position.y = rover.MAX_Y;
-        rover.moveBackwardY();
+        rover.moveDown();
         assertNotEquals(rover.position.y, rover.MIN_Y, 0.0);
     }
 
@@ -220,4 +220,6 @@ public class RoverTest {
         rover.turnRight();
         assertEquals(rover.direction, Directions.N.des);
     }
+
+
 }
