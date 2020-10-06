@@ -1,3 +1,5 @@
+package Rover_Exercise;
+
 public enum Commands {
     F ('f'),
     B('b'),

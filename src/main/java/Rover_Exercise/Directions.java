@@ -1,3 +1,5 @@
+package Rover_Exercise;
+
 public enum Directions {
     N ('N'),
     S('S'),

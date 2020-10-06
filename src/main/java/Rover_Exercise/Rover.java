@@ -1,3 +1,5 @@
+package Rover_Exercise;
+
 import java.util.ArrayList;
 
 public class Rover {
@@ -7,11 +9,11 @@ public class Rover {
     public final double MIN_Y = 0;
 
     public Position position;
-    char direction;
-    char command;
-    CommandBuffer commandBuffer;
+    public char direction;
+    public char command;
+    public CommandBuffer commandBuffer;
 
-    Rover() {
+    public Rover() {
         position = new Position();
         commandBuffer = new CommandBuffer(new ArrayList<>());
         direction = Directions.N.des;
